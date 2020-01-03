@@ -1,0 +1,79 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+	background-color: red;
+}
+
+ul {
+	list-style-type: none;
+}
+
+ul li {
+	font-size: 25px;
+	background-color: red;
+	width: 50%;
+	margin: auto;
+	color: white;
+	padding: 10px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+span {
+	padding: 14px;
+	text-align: right;
+}
+
+li:nth-child(odd) {
+	background-color: grey;
+}
+
+li:nth-child(even) {
+	background-color: grey;
+}
+
+
+
+
+
+
+
+.jumbotron {
+	font-family: 'Monospaced', Times New Roman;
+	background: url("");
+	background-size: cover;
+	background-position: center;
+	text-align: center;
+	text-shadow: 3px 3px #5bd6ff;
+	opacity: 85%;
+}
+
+label {
+	font-family: 'Monospaced', Times New Roman;
+  text-shadow: 3px 3px #5bd6ff; 
+}
+
+
+
+.todo-header {
+text-align: center;
+font-family: 'Monospaced', Times New Roman;
+text-shadow: 3px 3px #5bd6ff;
+}
+
+.completed {
+	text-decoration-line: line-through;
+  text-decoration-style: double;
+	color: green;
+}
+
+
+
+.high-priority {
+	width: 50px;
+	height: 50px;
+	color: red;
+}
