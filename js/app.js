@@ -1,78 +1,145 @@
 window.onload = function() {
-    document.getElementById("addButton").onclick = addTaskToList;
+  document.getElementById("add").onclick = addItem;
 }
 
-const chores = [];
+let listOfItems = [];
+let exclamationArray = [];
+let checkArray = [];
+let crossArray = [];
+let listTextArray = [];
+let toDo;
+let indexNumber = 0;
 
-const addTaskToList = function() {
-  const text = document.getElementById("addText").value;
-  const chore = {
-    id: chores.length,
-    priority: "low",
-    content: text,
-    complete: false
-  };
-  chores.push(chore);
+function addItem() {
+  if (document.getElementById("textbox").value == "") {
+    return;
+  } else {
+    const input = document.getElementById("textbox").value;
 
-  document.getElementById("addText").value = "";
+    listOfItems.push({
+      id: listOfItems.length,
+      content: input,
+      priority: "low",
+      complete: false
+    });
+    document.getElementById("textbox").value = "";
 
-    const renderChores = function(template , node) {
-      node.innerHTML = template;
-
-      var template = 'list';
-        render(template, document.querySelector('#list'));
-    }
+    displayItems();
+  }
 }
 
-const renderChores = function() {
+function displayItems() {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  for (let i = 0; i < chores.length; i++) {
+  for (let i = 0; i < listOfItems.length; i++) {
     const li = document.createElement("li");
-    const span1 = document.createElement("span");
-    const span2 = document.createElement("span");
-    const span3 = document.createElement("span");
-    const span4 = document.createElement("span");
+    const exclamation = document.createElement("span");
+    const check = document.createElement("span");
+    const cross = document.createElement("span");
+    const listText = document.createElement("span");
 
-    span1.innerHTML = "!";
-      span1.onclick = prioritizeTask();
-    span2.innerHTML = chores[i].content;
-    span3.innerHTML = "&#10004;";
-      span3.className = chores[i].complete === true ? "done" : "not-done";
-      span3.onclick = finishTask();
-    span4.innerHTML = "&#10006;";
-      span4.onclick = deleteTask();
-    span1.setAttribute("id" , "prioritize" + i);
-    span2.setAttribute("id" , "list" + i);
-    span3.setAttribute("id" , "check" + i);
-    span4.setAttribute("id" , "del" + i);
+    li.id = "item";
 
-    li.append(span1);
-    li.append(span2);
-    li.append(span3);
-    li.append(span4);
-    list.append(li);
+    exclamation.innerHTML = "  ! ";
+    check.innerHTML = " ✓ ";
+    cross.innerHTML = " ✗";
+    listText.innerHTML = listOfItems[i].content;
+
+    if (listOfItems[i].priority === "low") {
+
+      exclamation.className = "priorityButton";
+      console.log(exclamation.className)
+
+    } else if (listOfItems[i].priority === "high") {
+
+      exclamation.className = "prioritizedButton";
+      console.log(exclamation.className)
+
+    }
+
+    check.className = "doneButton";
+    cross.className = "crossButton";
+
+    if (listOfItems[i].complete === true) {
+
+      listText.className = "complete";
+
+    } else if (listOfItems[i].complete === false) {
+
+      listText.className = "incomplete";
+
+    }
+
+    exclamation.id = i;
+    check.id = i;
+    cross.id = i;
+    listText.id = i;
+
+    exclamation.onclick = togglePriority;
+    check.onclick = markDone;
+    cross.onclick = removeItem;
+
+    li.appendChild(exclamation);
+    li.appendChild(check);
+    li.appendChild(listText);
+    li.appendChild(cross);
+    list.appendChild(li);
   }
-};
 
-const prioritizeTask = function() {
-  var number = Number(this.id.charAt(10))
-  chore.priority = high
+
+  // document.getElementById("toDo").innerHTML = "";
+  // for (let i = 0; i < listOfItems.length; i++) {
+  //   toDo.appendChild(listOfItems[i]);
+  // }
 }
 
-const finishTask = function() {
-  var number = Number(this.id.charAt(5))
-  document.getElementById("priority").style.color = "green";
-  document.getElementById("list").style.color = "green";
-  document.getElementById("check").style.color = "green";
-  document.getElementById("del").style.color = "green";
+function togglePriority() {
+  const index = this.id;
+
+  if (listOfItems[index].priority === "low") {
+    listOfItems[index].priority = "high";
+
+    const item = listOfItems.splice(index, 1)[0];
+    listOfItems.unshift(item);
+  } else {
+    listOfItems[index].priority = "low";
+
+    const item = listOfItems.splice(index, 1)[0];
+    listOfItems.push(item);
+  }
+
+  displayItems();
 }
 
-const deleteTask = function() {
-  var number = Number(this.id.charAt(3))
-  var remove = document.getElementById(prioritize);
-  var remove2 = document.getElementById(list);
-  var remove3 = document.getElementById(check);
-  var remove4 = document.getElementById(del);
+// function lowerPriority(index) {
+//   toDo = document.getElementById("toDo");
+//   let index = .id;
+//   index.replace(" excl", "");
+//   listOfItems.push(listOfItems.splice(index, 1)[0]);
+//   exclamationArray[index].class = prioritizedButton
+//   displayItems();
+// }
+
+
+function markDone() {
+  const index = this.id;
+  toDo = document.getElementById("toDo");
+  if (listOfItems[index].complete === true) {
+
+    listOfItems[index].complete = false;
+
+  } else if (listOfItems[index].complete === false) {
+
+    listOfItems[index].complete = true;
+
+  }
+  displayItems();
+}
+
+function removeItem() {
+  const index = this.id;
+  toDo = document.getElementById("toDo");
+  listOfItems.splice(index, 1);
+  displayItems();
 }
