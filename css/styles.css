@@ -1,79 +1,45 @@
 * {
-  padding: 0;
-  margin: 0;
+  font-family: "Times New Roman";
+
 }
 
-body {
-	background-color: red;
+.complete {
+  text-decoration: line-through;
 }
 
-ul {
-	list-style-type: none;
+.priorityButton {
+  color: grey;
+  background-color: white;
+  cursor: pointer;
 }
 
-ul li {
-	font-size: 25px;
-	background-color: red;
-	width: 50%;
-	margin: auto;
-	color: white;
-	padding: 10px;
-	border-radius: 5px;
-	margin-bottom: 20px;
+.prioritizedButton {
+  color: red;
+  background-color: black;
+  cursor: pointer;
 }
 
-span {
-	padding: 14px;
-	text-align: right;
+.doneButton {
+  color: green;
+  cursor: pointer;
 }
 
-li:nth-child(odd) {
-	background-color: grey;
+.crossButton {
+  background-color: red;
+  color: black;
+  cursor: pointer;
 }
 
-li:nth-child(even) {
-	background-color: grey;
+h1 {
+  color: blue;
+  font-size: 45px;
 }
 
-
-
-
-
-
-
-.jumbotron {
-	font-family: 'Monospaced', Times New Roman;
-	background: url("");
-	background-size: cover;
-	background-position: center;
-	text-align: center;
-	text-shadow: 3px 3px #5bd6ff;
-	opacity: 85%;
+li {
+  color: blue
+  font-size: 26px;
 }
 
-label {
-	font-family: 'Monospaced', Times New Roman;
-  text-shadow: 3px 3px #5bd6ff; 
-}
-
-
-
-.todo-header {
-text-align: center;
-font-family: 'Monospaced', Times New Roman;
-text-shadow: 3px 3px #5bd6ff;
-}
-
-.completed {
-	text-decoration-line: line-through;
-  text-decoration-style: double;
-	color: green;
-}
-
-
-
-.high-priority {
-	width: 50px;
-	height: 50px;
-	color: red;
+#add {
+  cursor: pointer;
 }
