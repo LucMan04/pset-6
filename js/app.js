@@ -1,38 +1,78 @@
-$("ul").on("click", "li", function(event){
-	$(this).toggleClass("completed");
+window.onload = function() {
+    document.getElementById("addButton").onclick = addTaskToList;
+}
 
-});
+const chores = [];
 
+const addTaskToList = function() {
+  const text = document.getElementById("addText").value;
+  const chore = {
+    id: chores.length,
+    priority: "low",
+    content: text,
+    complete: false
+  };
+  chores.push(chore);
 
-$("ul").on("click", "span", function(event){
-	if ($(this).hasClass("priority")) {
-		$(this).toggleClass("high-priority");
-		if ($(this).hasClass("high-priority")) {
-			$(this).parent().prependTo("ul");
-		}
-		else {
-			$(this).parent().appendTo("ul");
-		}
-		
-		event.stopPropagation();
-		console.log("high");
-	}
-	else {
-		
-		$(this).parent().remove();
-		event.stopPropagation();
-	}
-	
-});
+  document.getElementById("addText").value = "";
 
-$("input[type='text']").keypress(function(event){
-	if(event.which === 13){
-		
-		var todoText = $(this).val();
-		$(this).val("");
-		if (todoText != "") {
-			
-			$("ul").append("<li><span class='priority'><i class='fa fa-exclamation-circle'></i></span><span><i class='fa fa-trash'></i></span> " + todoText + " </li>");
-		}
-	}
-});
+    const renderChores = function(template , node) {
+      node.innerHTML = template;
+
+      var template = 'list';
+        render(template, document.querySelector('#list'));
+    }
+}
+
+const renderChores = function() {
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  for (let i = 0; i < chores.length; i++) {
+    const li = document.createElement("li");
+    const span1 = document.createElement("span");
+    const span2 = document.createElement("span");
+    const span3 = document.createElement("span");
+    const span4 = document.createElement("span");
+
+    span1.innerHTML = "!";
+      span1.onclick = prioritizeTask();
+    span2.innerHTML = chores[i].content;
+    span3.innerHTML = "&#10004;";
+      span3.className = chores[i].complete === true ? "done" : "not-done";
+      span3.onclick = finishTask();
+    span4.innerHTML = "&#10006;";
+      span4.onclick = deleteTask();
+    span1.setAttribute("id" , "prioritize" + i);
+    span2.setAttribute("id" , "list" + i);
+    span3.setAttribute("id" , "check" + i);
+    span4.setAttribute("id" , "del" + i);
+
+    li.append(span1);
+    li.append(span2);
+    li.append(span3);
+    li.append(span4);
+    list.append(li);
+  }
+};
+
+const prioritizeTask = function() {
+  var number = Number(this.id.charAt(10))
+  chore.priority = high
+}
+
+const finishTask = function() {
+  var number = Number(this.id.charAt(5))
+  document.getElementById("priority").style.color = "green";
+  document.getElementById("list").style.color = "green";
+  document.getElementById("check").style.color = "green";
+  document.getElementById("del").style.color = "green";
+}
+
+const deleteTask = function() {
+  var number = Number(this.id.charAt(3))
+  var remove = document.getElementById(prioritize);
+  var remove2 = document.getElementById(list);
+  var remove3 = document.getElementById(check);
+  var remove4 = document.getElementById(del);
+}
