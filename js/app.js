@@ -2,13 +2,13 @@ window.onload = function() {
   document.getElementById("add").onclick = addItem;
 }
 
-let listOfItems = [];
-let exclamationArray = [];
-let checkArray = [];
-let crossArray = [];
-let listTextArray = [];
-let toDo;
-let indexNumber = 0;
+  let listOfItems = [];
+  let exclamationArray = [];
+  let crossArray = [];
+  let checkArray = [];
+  let listTextArray = [];
+  let toDo;
+  let indexNumber = 0;
 
 function addItem() {
   if (document.getElementById("textbox").value == "") {
@@ -32,18 +32,18 @@ function displayItems() {
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  for (let i = 0; i < listOfItems.length; i++) {
-    const li = document.createElement("li");
-    const exclamation = document.createElement("span");
-    const check = document.createElement("span");
-    const cross = document.createElement("span");
-    const listText = document.createElement("span");
+for (let i = 0; i < listOfItems.length; i++) {
+  const li = document.createElement("li");
+  const exclamation = document.createElement("span");
+  const check = document.createElement("span");
+  const cross = document.createElement("span");
+  const listText = document.createElement("span");
 
     li.id = "item";
 
     exclamation.innerHTML = "  ! ";
-    check.innerHTML = " ✓ ";
-    cross.innerHTML = " ✗";
+    check.innerHTML = " Done ";
+    cross.innerHTML = " Delete";
     listText.innerHTML = listOfItems[i].content;
 
     if (listOfItems[i].priority === "low") {
@@ -86,12 +86,6 @@ function displayItems() {
     li.appendChild(cross);
     list.appendChild(li);
   }
-
-
-  // document.getElementById("toDo").innerHTML = "";
-  // for (let i = 0; i < listOfItems.length; i++) {
-  //   toDo.appendChild(listOfItems[i]);
-  // }
 }
 
 function togglePriority() {
@@ -112,27 +106,13 @@ function togglePriority() {
   displayItems();
 }
 
-// function lowerPriority(index) {
-//   toDo = document.getElementById("toDo");
-//   let index = .id;
-//   index.replace(" excl", "");
-//   listOfItems.push(listOfItems.splice(index, 1)[0]);
-//   exclamationArray[index].class = prioritizedButton
-//   displayItems();
-// }
-
-
 function markDone() {
   const index = this.id;
   toDo = document.getElementById("toDo");
   if (listOfItems[index].complete === true) {
-
     listOfItems[index].complete = false;
-
   } else if (listOfItems[index].complete === false) {
-
     listOfItems[index].complete = true;
-
   }
   displayItems();
 }
